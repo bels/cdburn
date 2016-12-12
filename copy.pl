@@ -14,14 +14,17 @@ $dest = <STDIN>;
 chomp $dest;
 if(copy_that_shit()){
 
-	say "Restart press Y to Stop press N"; #do you mean to copy the same file again or want to repeat the whole process including what to copy
-	$cancel = <STDIN>;
-	chomp $cancel;
-	if( $cancel eq "N") { 
-		say "Canceling";
-		#no need for exit cause it will just leave the logic block and exit on it's own.  leaving random exits around can get you in bigger programs cause you'll lose track of them
-	}else {
-		copy_that_shit();
+	$cancel = 'y';
+	while(lc($cancel) eq 'y'){
+		say "Restart press Y to Stop press N"; #do you mean to copy the same file again or want to repeat the whole process including what to copy
+		$cancel = <STDIN>;
+		chomp $cancel;
+		if( lc($cancel) eq "n") { 
+			say "Canceling";
+			#no need for exit cause it will just leave the logic block and exit on it's own.  leaving random exits around can get you in bigger programs cause you'll lose track of them
+		}else {
+			copy_that_shit();
+		}
 	}
 } else {
 	#oh noes, shit went bad.  we might want to log/warn/do some corrective action
